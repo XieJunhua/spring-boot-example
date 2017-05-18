@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: dev
+
+---
+server:
+  port: 8004
+spring:
+  profiles: dev
+  output:
+    ansi:
+      enabled: detect
+  data:
+    mongodb:
+      host: localhost
+      database: mofa
+      port: 27017
+---
+server:
+  port: 8009
+spring:
+  profiles: test
+---
+server:
+  port: 8008
+spring:
+  profiles: prod
