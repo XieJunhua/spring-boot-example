@@ -1,17 +1,18 @@
 package com.junhua.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.junhua.dao.StudentRepository;
 import com.junhua.pojo.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by xiejunhua on 2017/5/17.
@@ -31,6 +32,39 @@ public class TestController {
 
         logger.info("test logger");
         return "hello world";
+    }
+
+    @RequestMapping("/test")
+    public String test(Model model) {
+//        ModelMap model = new ModelMap();
+        List arrlist = new ArrayList();
+        arrlist.add("ts");
+        model.addAttribute("users", arrlist);
+        return "test1";
+    }
+
+    @PostMapping("/tongdun")
+    @ResponseBody
+    public String tongdun(@RequestBody Map map) {
+
+        System.out.println(map);
+
+        Map map1 = new HashMap();
+        if ("123456".equals(map.get("token"))) {
+            map1.put("tongdun", "tongdunid");
+            map1.put("dddd", "dddd1");
+        }
+
+
+        JSONObject jsonObject = new JSONObject(map1);
+        String str = jsonObject.toJSONString();
+
+
+
+
+
+        return str;
+
     }
 
 }
